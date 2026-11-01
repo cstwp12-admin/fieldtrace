@@ -1,0 +1,13 @@
+export type SdrReference={projectKey:string;reportRef:string;reportDate:string;reporter:string;team:string;itemNo:number;pdfDigest:string;photoPage:number|null;activity:string;location:string;remarks:string;snapshotDigest:string};
+export type ReferencePackage={schemaVersion:string;packageId:string;exportedAt:string;projectKey:string;references:SdrReference[];contentDigest:string};
+export const REFERENCE_SCHEMA:string;
+export function referenceKey(r:SdrReference):string;
+export function referenceBody(r:SdrReference):unknown;
+export function referenceText(r:SdrReference):string;
+export function validateReference(r:SdrReference,key:string):SdrReference;
+export function verifyReference(r:SdrReference,key:string):Promise<SdrReference>;
+export function validateReferencePackage(p:unknown,key:string):Promise<ReferencePackage>;
+export function makeReferencePackage(r:SdrReference[],key:string):Promise<ReferencePackage>;
+export function makeReference(report:any,item:any,key:string):Promise<SdrReference>;
+export function sharedKey(active:any,binding:any):Promise<string>;
+export function resolveReference(r:SdrReference,reports:any[]):Promise<{state:string;label:string;report?:any;item?:any}>;

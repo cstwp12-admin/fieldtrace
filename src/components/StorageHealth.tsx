@@ -1,0 +1,6 @@
+import { useEffect, useState } from 'react';
+export function StorageHealth(){
+  const [persistent,setPersistent]=useState<boolean|null>(null),[usage,setUsage]=useState(''),[message,setMessage]=useState('');
+  useEffect(()=>{if(!navigator.storage)return;void navigator.storage.persisted?.().then(setPersistent).catch(()=>{});void navigator.storage.estimate?.().then(s=>{setUsage(`${((s.usage??0)/1048576).toFixed(1)} MB used in this browser origin`);}).catch(()=>{});},[]);
+  return <section className="panel storage-health"><div><h2>Device storage</h2><p>{persistent===true?'Persistent storage granted.':persistent===false?'Browser storage may be cleared under storage pressure.':'Storage persistence status unavailable.'} {usage}</p><p>Downloaded backups remain essential, including after enabling persistence.</p>{message&&<p role="status">{message}</p>}</div><button className="button" disabled={persistent===true||!navigator.storage?.persist} onClick={async()=>{try{const yes=await navigator.storage.persist();setPersistent(yes);setMessage(yes?'Persistence enabled for this app origin.':'Browser did not grant persistence. Keep regular backups.');}catch{setMessage('Persistence could not be requested in this browser.');}}}>{persistent?'Persistence enabled':'Request persistent storage'}</button></section>;
+}

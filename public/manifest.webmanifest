@@ -1,0 +1,12 @@
+{
+  "id": "./",
+  "name": "FieldTrace — Field supervision",
+  "short_name": "FieldTrace",
+  "description": "Local observations, action evidence and verification history.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f7f3",
+  "theme_color": "#153c35",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
